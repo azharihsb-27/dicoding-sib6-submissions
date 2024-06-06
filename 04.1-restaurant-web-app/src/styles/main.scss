@@ -1,0 +1,725 @@
+/* Variables */
+// Font Family
+$primary-font: "Poppins", sans-serif;
+$secondary-font: "Montserrat", sans-serif;
+
+// Font-Weight
+$bold-weight: 700;
+$semibold-weight: 600;
+$medium-weight: 500;
+$regular-weight: 400;
+$light-weight: 300;
+
+// Colors
+$primary-color: #ed7d31;
+$secondary-color: #6c5f5b;
+$accent-color: #4f4a45;
+$base-color: #f6f1ee;
+
+/* Mixins */
+// Flex
+@mixin flex($justify, $align, $direction: row, $gap: 0) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+// Grid
+@mixin grid($columnTemplate, $gap: 0) {
+  display: grid;
+  grid-template-columns: $columnTemplate;
+  gap: $gap;
+}
+
+// Button
+@mixin clickable($padding, $color, $backgroundColor, $fontSize) {
+  padding: $padding;
+  color: $color;
+  background-color: $backgroundColor;
+  border: none;
+  font-size: $fontSize;
+  cursor: pointer;
+}
+
+// Resetting All Elements Styles
+* {
+  padding: 0;
+  margin: 0;
+  font-family: $primary-font;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#skip-to-content {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  padding: 8px 12px;
+  background-color: $primary-color;
+  color: $base-color;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  z-index: 99;
+}
+
+#skip-to-content:focus {
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+}
+
+/* Start of Header*/
+header {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 80px;
+  background-color: transparent;
+  padding: 0 25px;
+  z-index: 99;
+
+  .navbar {
+    @include flex(space-between, center);
+    height: 100%;
+
+    .nav-brand {
+      color: $base-color;
+      span {
+        color: $primary-color;
+      }
+    }
+    .nav-links {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: max-content;
+      padding: 30px 0;
+      display: none;
+      background-color: $accent-color;
+      list-style: none;
+      transition: all 0.2s ease-in-out;
+
+      .nav-links_item a {
+        padding: 14px;
+        text-decoration: none;
+        color: $base-color;
+        font-family: $secondary-font;
+        font-weight: $semibold-weight;
+        transition: all 0.2s ease-out;
+      }
+      .nav-links_item a:hover {
+        color: $primary-color;
+      }
+    }
+    .nav-btn {
+      @include clickable(12px 14px, $base-color, transparent, 22px);
+    }
+  }
+  .navbar.active {
+    .nav-links {
+      @include flex(center, center, column, 15px);
+      transform: translateY(80px);
+    }
+  }
+}
+header:has(.navbar.active) {
+  background-color: $accent-color;
+}
+/* End of Header */
+
+/* Start of Main */
+main {
+  width: 100%;
+
+  // Start of Hero Section
+  .hero {
+    width: 100%;
+    height: 100vh;
+    padding: 0 25px;
+    @include flex(center, center, column, 150px);
+    background-image: url("../public/images/hero-image_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: 30%;
+
+    &_description {
+      color: $base-color;
+
+      p {
+        font-size: 1.2rem;
+      }
+      h1 {
+        font-size: 2.2rem;
+        font-weight: $semibold-weight;
+        font-family: $secondary-font;
+
+        span {
+          color: $primary-color;
+          font-weight: $bold-weight;
+        }
+      }
+    }
+    .explore {
+      @include clickable(10px 8px, $base-color, $primary-color, 1rem);
+      border: $primary-color 1px solid;
+      transition: all 0.1s ease-in-out;
+      text-decoration: none;
+    }
+    .explore:hover {
+      color: $primary-color;
+      background-color: $base-color;
+      border: $primary-color 1px solid;
+    }
+    .explore:active {
+      background-color: #ccc7c4;
+    }
+  }
+  // End of Hero Section
+
+  // Start of Top Kitchen Section
+  .top-kitchen {
+    width: 100%;
+    padding: 36px 25px;
+
+    &_title {
+      color: $primary-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $medium-weight;
+
+      span {
+        color: $accent-color;
+      }
+    }
+    &_list {
+      @include grid(repeat(1, 1fr), 12px);
+      padding: 24px 0;
+
+      .top-kitchen_item {
+        border: $accent-color 3px solid;
+        border-radius: 8px;
+        position: relative;
+        background-color: $base-color;
+
+        .top-kitchen_item_rating {
+          position: absolute;
+          top: 0;
+          right: 0;
+          @include flex(center, center, row, 8px);
+          padding: 4px 8px;
+          background-color: $accent-color;
+          color: $base-color;
+          font-size: 0.8rem;
+          border-bottom-left-radius: 4px;
+
+          i {
+            color: #ffce31;
+          }
+        }
+        .top-kitchen_item_img {
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 4px 4px 0 0;
+        }
+        .top-kitchen_item_description {
+          padding: 8px 16px;
+          margin-bottom: 6px;
+
+          .kitchen-name {
+            font-size: 1rem;
+            font-weight: $medium-weight;
+            font-family: $primary-font;
+            color: $primary-color;
+          }
+          .kitchen-city {
+            font-size: 0.8rem;
+            font-weight: $regular-weight;
+            line-height: 10px;
+            color: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+  // End of Top Kitchen Section
+
+  // Start of About Section
+  .about {
+    width: 100%;
+    padding: 24px 25px;
+    background-color: $secondary-color;
+
+    &_title {
+      color: $base-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $medium-weight;
+
+      span {
+        color: $primary-color;
+      }
+    }
+    &_description {
+      @include grid(repeat(2, 50%), 12px);
+      padding: 12px 0;
+      grid-template-areas:
+        "img content"
+        "feature feature";
+
+      .about_description_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        grid-area: img;
+      }
+      .about_description_content {
+        @include flex(center, center, column, 12px);
+        padding-bottom: 24px;
+        grid-area: content;
+
+        p {
+          span {
+            font-size: 1.5rem;
+          }
+          color: $base-color;
+          font-size: 0.8rem;
+          font-weight: $regular-weight;
+          line-height: 1.2rem;
+        }
+        button {
+          @include clickable(11px 12px, $base-color, $primary-color, 0.9rem);
+          border: $primary-color 1px solid;
+          transition: all 0.1s ease-in-out;
+        }
+        button:hover {
+          color: $primary-color;
+          background-color: $base-color;
+          border: $primary-color 1px solid;
+        }
+        button:active {
+          background-color: #ccc7c4;
+        }
+      }
+      .about_description_feature {
+        grid-area: feature;
+        justify-self: center;
+        margin-top: 8px;
+
+        span {
+          padding: 6px 10px;
+          font-size: 10px;
+          font-family: $secondary-font;
+          font-weight: $medium-weight;
+          color: $primary-color;
+          background-color: $base-color;
+          border: $primary-color 1px solid;
+          border-radius: 16px;
+        }
+      }
+    }
+  }
+  // End of About Section
+
+  // Start of All Kitchen
+  .all-kitchen {
+    width: 100%;
+    padding: 36px 25px;
+
+    &_title {
+      color: $primary-color;
+      font-size: 1.5rem;
+      font-family: $secondary-font;
+      font-weight: $medium-weight;
+
+      span {
+        color: $accent-color;
+      }
+    }
+    &_list {
+      @include grid(repeat(1, 1fr), 12px);
+      padding: 24px 0;
+
+      .all-kitchen_item {
+        border: $accent-color 3px solid;
+        border-radius: 8px;
+        position: relative;
+        background-color: $base-color;
+
+        .all-kitchen_item_rating {
+          position: absolute;
+          top: 0;
+          right: 0;
+          @include flex(center, center, row, 8px);
+          padding: 4px 8px;
+          background-color: $accent-color;
+          color: $base-color;
+          font-size: 0.8rem;
+          border-bottom-left-radius: 4px;
+
+          i {
+            color: #ffce31;
+          }
+        }
+        .all-kitchen_item_img {
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 4px 4px 0 0;
+        }
+        .all-kitchen_item_description {
+          padding: 8px 16px;
+          margin-bottom: 6px;
+
+          .kitchen-name {
+            font-size: 1rem;
+            font-weight: $medium-weight;
+            font-family: $primary-font;
+            color: $primary-color;
+          }
+          .kitchen-city {
+            font-size: 0.8rem;
+            font-weight: $regular-weight;
+            line-height: 10px;
+            color: $secondary-color;
+          }
+          .kitchen-description {
+            font-size: 1rem;
+            font-weight: $light-weight;
+            color: $secondary-color;
+            margin-top: 8px;
+          }
+        }
+      }
+    }
+  }
+  // End of All Kitchen
+}
+/* End of Main */
+
+/* Start of Footer */
+footer {
+  width: 100%;
+  height: 60px;
+  @include flex(center, center, row, 0);
+  background-color: $secondary-color;
+
+  p {
+    color: $base-color;
+
+    span {
+      color: $primary-color;
+    }
+  }
+}
+/* End of Footer */
+
+/* Start of Media Query */
+// Tablet Media Query
+@media screen and (min-width: 768px) {
+  /* Start of Header Query */
+  header {
+    padding: 0 56px;
+
+    .navbar {
+      .nav-links {
+        width: 100%;
+        position: inherit;
+        @include flex(flex-end, center, row, 80px);
+        background-color: transparent;
+      }
+      .nav-btn {
+        display: none;
+      }
+    }
+  }
+  /* End of Header Media Query */
+
+  /* Start of Main Query */
+  main {
+    /* Start of Hero Section Query */
+    .hero {
+      padding: 0 56px;
+      gap: 120px;
+      background-position-x: 10%;
+
+      &_description {
+        text-align: center;
+        h1 {
+          text-align: center;
+        }
+      }
+    }
+    /* End of Hero Section Query */
+
+    /* Start of Top Kitchen Query */
+    .top-kitchen {
+      padding: 36px 56px;
+
+      &_list {
+        @include grid(repeat(2, 1fr), 24px);
+      }
+    }
+    /* End of Top Kitchen Query */
+
+    /* Start of About Section Query */
+    .about {
+      padding: 36px 56px;
+
+      &_description {
+        .about_description_content {
+          p {
+            span {
+              font-size: 1.8rem;
+            }
+            font-size: 1rem;
+            line-height: normal;
+          }
+        }
+        .about_description_feature {
+          span {
+            padding: 8px 12px;
+            margin: 0 8px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    /* End of About Section Query */
+
+    /* Start of All Kitchen Query */
+    .all-kitchen {
+      padding: 36px 56px;
+
+      &_list {
+        @include grid(repeat(2, 1fr), 24px);
+      }
+    }
+    /* End of All Kitchen Query */
+  }
+  /* End of Main Query */
+}
+
+// Laptop Media Query
+@media screen and (min-width: 1024px) {
+  /* Start of Header Query */
+  header {
+    padding: 0 80px;
+
+    .navbar {
+      .nav-brand {
+        font-size: 2rem;
+      }
+      .nav-links {
+        .nav-links_item a {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  /* End of Header Query */
+
+  /* Start of Main Query */
+  main {
+    /* Start of Hero Section Query */
+    .hero {
+      padding: 0 80px;
+      gap: 100px;
+
+      &_description {
+        p {
+          font-size: 1.6rem;
+        }
+        h1 {
+          font-size: 2.6rem;
+        }
+      }
+      button {
+        @include clickable(12px 10px, $base-color, $primary-color, 1.2rem);
+      }
+    }
+    /* End of Hero Section Query */
+
+    /* Start of Top Kitchen Query */
+    .top-kitchen {
+      padding: 36px 80px;
+
+      &_title {
+        font-size: 2rem;
+        font-weight: $semibold-weight;
+      }
+      &_list {
+        @include grid(repeat(3, 1fr), 24px);
+
+        .top-kitchen_item {
+          .top-kitchen_item_description {
+            .kitchen-name {
+              font-size: 1.4rem;
+            }
+            .kitchen-city {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    /* End of Top Kitchen Query */
+
+    /* Start of About Section Query */
+    .about {
+      padding: 24px 80px;
+      &_title {
+        font-size: 2rem;
+        font-weight: $semibold-weight;
+      }
+      &_description {
+        padding: 24px 0;
+
+        .about_description_content {
+          p {
+            span {
+              font-size: 2.2rem;
+            }
+            font-size: 1.2rem;
+            line-height: normal;
+          }
+          button {
+            @include clickable(8px 14px, $base-color, $primary-color, 1.2rem);
+            margin-top: 24px;
+          }
+        }
+        .about_description_feature {
+          margin-top: 24px;
+
+          span {
+            padding: 10px 14px;
+            margin: 0 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    /* End of About Section Query */
+
+    /* Start of All Kitchen Section Query */
+    .all-kitchen {
+      padding: 36px 80px;
+
+      &_title {
+        font-size: 2rem;
+        font-weight: $semibold-weight;
+      }
+      &_list {
+        @include grid(repeat(3, 1fr), 24px);
+
+        .all-kitchen_item {
+          .all-kitchen_item_description {
+            .kitchen-name {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+    /* End of Kitchen Section Query */
+  }
+  /* End of Main Query */
+}
+
+// Desktop Media Query
+@media screen and (min-width: 1440px) {
+  /* Start of Main Query */
+  main {
+    /* Start of Hero Section Query */
+    .hero {
+      padding: 0 80px;
+      gap: 40px;
+
+      &_description {
+        width: 60%;
+
+        h1 {
+          font-weight: $bold-weight;
+        }
+      }
+      button {
+        @include clickable(12px 10px, $base-color, $primary-color, 1.2rem);
+      }
+    }
+    /* End of Hero Section Query */
+
+    /* Start of Top Kitchen Query */
+    .top-kitchen {
+      &_title {
+        font-weight: $bold-weight;
+      }
+    }
+    /* End of Top Kitchen Query */
+
+    /* Start of About Section Query */
+    .about {
+      &_title {
+        font-weight: $bold-weight;
+      }
+      &_description {
+        .about_description_content {
+          p {
+            span {
+              font-size: 2.8rem;
+              font-weight: $bold-weight;
+            }
+            font-size: 1.4rem;
+            line-height: normal;
+          }
+          button {
+            @include clickable(8px 14px, $base-color, $primary-color, 1.2rem);
+            margin-top: 24px;
+          }
+        }
+        .about_description_feature {
+          margin-top: 24px;
+
+          span {
+            padding: 10px 14px;
+            margin: 0 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    /* End of About Section Query */
+
+    /* Start of All Kitchen Section Query */
+    .all-kitchen {
+      padding: 36px 80px;
+
+      &_title {
+        font-size: 2rem;
+        font-weight: $semibold-weight;
+      }
+      &_list {
+        @include grid(repeat(3, 1fr), 24px);
+
+        .all-kitchen_item {
+          .all-kitchen_item_description {
+            .kitchen-name {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+    /* End of Kitchen Section Query */
+  }
+  /* End of Main Query */
+}
+
+/* End of Media Query */

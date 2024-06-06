@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Notes App</title>
+    <script defer="defer" src="bundle.js"></script>
+  </head>
+  <body>
+    <header><app-header></app-header></header>
+    <main>
+      <div class="container">
+        <section class="notes">
+          <div id="appFormContainer" class="app-form-container">
+            <app-form></app-form>
+          </div>
+          <div id="appNoteContainer" class="app-note-container">
+            <h1>Note Lists</h1>
+            <app-search></app-search>
+            <div class="btnArc-action">
+              <button class="btnArc btn-non-archive active" id="nonArchived">
+                Non Archived Notes
+              </button>
+              <button class="btnArc btn-archive" id="archived">
+                Archived Notes
+              </button>
+            </div>
+            <div class="search-loading"><div id="loader"></div></div>
+            <app-search-error></app-search-error><app-note-list></app-note-list>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer><app-footer></app-footer></footer>
+  </body>
+</html>

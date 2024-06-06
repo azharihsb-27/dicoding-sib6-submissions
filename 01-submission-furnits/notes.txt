@@ -1,0 +1,9 @@
+Penerapan javascript
+1. navigation bar
+ketika user sedang menggunakan device yang resolusi layarnya kurang dari 700px, maka navigation bar akan berganti ke mode mobile.
+dapat diakses dengan cara inspect element, mengaktifkan mode toggle device emulation dan menekan tombol hamburger yang berada di atas kanan layar.
+
+2. testimonials slider
+pada halaman contact terdapat sebuah testimonial-item yang dapat digeser menggunakan tombol arrow next dan prev yang disediakan.
+
+terdapat sebuah smooth scroll untuk berpindah ke halaman tertentu ketika mengklik navigasi yang ada di navigation bar, footer, maupun tombol scroll to top yang terletak di sebelah kanan footer.
